@@ -1,0 +1,46 @@
+<!-- results.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+</head>
+
+<body>
+    <h1>Optimization Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Penetration (mm)</th>
+                <th>Wire Feed Rate (m/min)</th>
+                <th>Arc Voltage (volts)</th>
+                <th>Contact Tube Distance (mm)</th>
+                <th>Width/Height Ratio</th>
+                <th>Width/Penetration Ratio</th>
+                <th>Area of Penetration (mm²)</th>
+                <th>Dilution (%)</th>
+                <th>RHI (j/mm)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result['penetration'] }}</td>
+                <td>{{ result['wire_feed_rate'] }}</td>
+                <td>{{ result['arc_voltage'] }}</td>
+                <td>{{ result['contact_tube_distance'] }}</td>
+                <td>{{ result['width_height_ratio'] }}</td>
+                <td>{{ result['width_penetration_ratio'] }}</td>
+                <td>{{ result['area_of_penetration'] }}</td>
+                <td>{{ result['dilution'] }}</td>
+                <td>{{ result['RHI'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

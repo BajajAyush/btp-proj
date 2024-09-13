@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Third Parameters</title>
+</head>
+
+<body>
+    <h1>Enter Third Parameters</h1>
+    <form action="/thirdparameters" method="POST">
+        <label for="usr_p">Enter penetration range (3.98 mm - 5.82mm):</label>
+        <input type="number" id="usr_p" name="usr_p" step="0.01" min="3.98" max="5.82" required><br><br>
+        <label for="var_int">Enter Acceptable Variation (1-10%):</label>
+        <input type="number" id="var_int" name="var_int" step="0.01" min="1" max="10" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

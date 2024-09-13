@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimization Results</title>
+</head>
+
+<body>
+    <h1>Optimization Results</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Penetration</th>
+                <th>Wire Feed Rate</th>
+                <th>Arc Voltage</th>
+                <th>Contact Tube To</th>
+                <th>Plate Distance</th>
+                <th>Angle</th>
+                <th>Welding Speed</th>
+                <th>Gas Flow Rate</th>
+                <th>RHI</th>
+                <th>Area of Penetration</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.penetration }}</td>
+                <td>{{ result.wire_feed_rate }}</td>
+                <td>{{ result.arc_voltage }}</td>
+                <td>{{ result.contact_tube_to }}</td>
+                <td>{{ result.plate_distance }}</td>
+                <td>{{ result.angle }}</td>
+                <td>{{ result.welding_speed }}</td>
+                <td>{{ result.gas_flow_rate }}</td>
+                <td>{{ result.rhi }}</td>
+                <td>{{ result.area_of_penetration }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
