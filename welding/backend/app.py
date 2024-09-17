@@ -1,5 +1,9 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,jsonify
+from flask import Flask, jsonify
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 THICKNESS = 13
 
@@ -285,14 +289,10 @@ def optimized():
     # No print statements here
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
 @app.route('/calculate', methods=['GET', 'POST'])
 def calculate():
     if request.method == 'GET':
-        optimized()
+        optimized()  # Assuming you have the optimized function
         results = []  # Store optimization results
         for j in range(1, scpen + 1):
             vnat = pval[j].v1 * 2.5 + 26.5
@@ -316,13 +316,15 @@ def calculate():
             }
             results.append(result)
 
-        return render_template('results.html', results=results)
-    else:
-        return render_template('index.html')
+        # Return the results as JSON to be used by React
+        return jsonify(results)
+    
+    # If the request method is not GET, return a 405 error (method not allowed)
+    return jsonify({"error": "Method not allowed"}), 405
 
 
-        def check_range(value, min_val, max_val):
-          return min_val <= value <= max_val
+
+
 
 def usr_opt(usr_w, usr_v, usr_n, usr_th, usr_s, usr_g):
     w = (usr_w - ((6.1 + 7.6) / 2)) / (7.6 - (6.1 + 7.6) / 2)
@@ -354,23 +356,23 @@ def usr_opt(usr_w, usr_v, usr_n, usr_th, usr_s, usr_g):
         'ap': ap
     }
 
-@app.route('/secondf', methods=['POST'])
-def secondf():
-    if request.method == 'POST':
-        # Retrieve form data
-        usr_w = float(request.form['wire_feed_rate'])
-        usr_v = float(request.form['arc_voltage'])
-        usr_n = float(request.form['nozzle_distance'])
-        usr_th = float(request.form['electrode_inclination'])
-        usr_s = float(request.form['welding_speed'])
-        usr_g = float(request.form['gas_flow_rate'])
+# @app.route('/secondf', methods=['POST'])
+# def secondf():
+#     if request.method == 'POST':
+#         # Retrieve form data
+#         usr_w = float(request.form['wire_feed_rate'])
+#         usr_v = float(request.form['arc_voltage'])
+#         usr_n = float(request.form['nozzle_distance'])
+#         usr_th = float(request.form['electrode_inclination'])
+#         usr_s = float(request.form['welding_speed'])
+#         usr_g = float(request.form['gas_flow_rate'])
 
-        # Call usr_opt() to process the form data
-        result = usr_opt(usr_w, usr_v, usr_n, usr_th, usr_s, usr_g)
+#         # Call usr_opt() to process the form data
+#         result = usr_opt(usr_w, usr_v, usr_n, usr_th, usr_s, usr_g)
 
-        return render_template('second.html', result=result)
+#         return render_template('second.html', result=result)
 
-@app.route('/parameters', methods=['GET', 'POST'])
+@app.route('/parameters', methods=['GET','POST'])
 def parameters():
     if request.method == 'POST':
         # Retrieve form data
@@ -383,11 +385,10 @@ def parameters():
 
         # Call usr_opt() to process the form data
         result = usr_opt(usr_w, usr_v, usr_n, usr_th, usr_s, usr_g)
-
-        # Render the parameters template with the calculated values
-        return render_template('secondf.html', result=result)
-    else:
-        return render_template('secondf.html')     
+        
+        
+        # Return JSON response
+        return jsonify(result)   
 
 
 def resp_opt(user_p, vaer_int):
@@ -591,18 +592,16 @@ def resp_opt(user_p, vaer_int):
     sortarr6()
 
 
-@app.route('/thirdparameters', methods=['GET', 'POST'])
+@app.route('/thirdparameters', methods=['POST'])
 def third_parameters():
     if request.method == 'POST':
         usr_p = float(request.form['usr_p'])
         var_int = float(request.form['var_int'])
 
         # Call the resp_opt function with user input
-        #print(usr_p,var_int)
         resp_opt(usr_p, var_int)
 
-        # In resp_opt function after calculation
-       # print(scpen)
+        # Determine the number of results to process
         scpen_print = scpen if scpen <= 10 else 10
 
         results = []  # Initialize results list
@@ -629,12 +628,9 @@ def third_parameters():
                 'dilution': round(pval_j['dil'], 2),
                 'RHI': round(pval_j['rhi'], 2)
             })
-            #print(results)
 
-        # Render a new HTML page to display the results
-        return render_template('thirdresult.html', results=results)
-    else:
-        return render_template('thirdparameters.html')
+        # Return JSON response
+        return jsonify(results)
 
 
 
