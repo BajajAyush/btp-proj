@@ -33,17 +33,27 @@ const ThirdParameter = () => {
     };
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f4f4f4' }}>
-            <form onSubmit={handleSubmit} style={{
-                maxWidth: '600px',
-                width: '100%',
-                padding: '20px',
-                background: 'white',
-                borderRadius: '8px',
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-                display: 'flex',
-                flexDirection: 'column'
-            }}>
+        <div style={{
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            flexDirection: 'column',
+            minHeight: '100vh', 
+            backgroundColor: '#f4f4f4'
+        }}>
+            <form 
+                onSubmit={handleSubmit} 
+                style={{
+                    maxWidth: '600px', 
+                    width: '100%', 
+                    padding: '20px', 
+                    background: 'white', 
+                    borderRadius: '8px', 
+                    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+                    display: 'flex', 
+                    flexDirection: 'column',
+                    marginBottom: '20px'
+                }}>
                 <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Enter Third Parameters</h1>
 
                 <label htmlFor="usr_p" style={{ marginBottom: '10px', fontWeight: 'bold' }}>Enter penetration range (3.98 mm - 5.82 mm):</label>
@@ -90,23 +100,69 @@ const ThirdParameter = () => {
             </form>
 
             {results.length > 0 && (
-                <div style={{ marginTop: '20px', maxWidth: '600px', width: '100%', padding: '20px', background: 'white', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
+                <div style={{
+                    width: '100%', 
+                    maxWidth: '800px', 
+                    padding: '20px', 
+                    background: 'white', 
+                    borderRadius: '8px', 
+                    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+                }}>
                     <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Processed Results</h2>
-                    <ul>
-                        {results.map((result, index) => (
-                            <li key={index}>
-                                <strong>Penetration:</strong> {result.penetration} <br />
-                                <strong>Wire Feed Rate:</strong> {result.wire_feed_rate} <br />
-                                <strong>Arc Voltage:</strong> {result.arc_voltage} <br />
-                                <strong>Contact Tube Distance:</strong> {result.contact_tube_distance} <br />
-                                <strong>Width/Height Ratio:</strong> {result.width_height_ratio} <br />
-                                <strong>Width/Penetration Ratio:</strong> {result.width_penetration_ratio} <br />
-                                <strong>Area of Penetration:</strong> {result.area_of_penetration} <br />
-                                <strong>Dilution:</strong> {result.dilution} <br />
-                                <strong>RHI:</strong> {result.RHI} <br />
-                            </li>
-                        ))}
-                    </ul>
+                    <table style={{
+                        width: '100%', 
+                        borderCollapse: 'collapse', 
+                        textAlign: 'left'
+                    }}>
+                        <thead>
+                            <tr>
+                                <th style={{ borderBottom: '2px solid #ccc', paddingBottom: '10px' }}>Parameter</th>
+                                <th style={{ borderBottom: '2px solid #ccc', paddingBottom: '10px' }}>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {results.map((result, index) => (
+                                <React.Fragment key={index}>
+                                    <tr>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}><strong>Penetration (mm):</strong></td>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}>{result.penetration}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}><strong>Wire Feed Rate (m/min):</strong></td>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}>{result.wire_feed_rate}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}><strong>Arc Voltage (V):</strong></td>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}>{result.arc_voltage}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}><strong>Contact Tube Distance (mm):</strong></td>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}>{result.contact_tube_distance}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}><strong>Width/Height Ratio:</strong></td>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}>{result.width_height_ratio}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}><strong>Width/Penetration Ratio:</strong></td>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}>{result.width_penetration_ratio}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}><strong>Area of Penetration (mm²):</strong></td>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}>{result.area_of_penetration}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}><strong>Dilution (%):</strong></td>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}>{result.dilution}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}><strong>RHI:</strong></td>
+                                        <td style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}>{result.RHI}</td>
+                                    </tr>
+                                </React.Fragment>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             )}
         </div>
