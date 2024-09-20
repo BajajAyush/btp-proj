@@ -54,9 +54,9 @@ const ThirdParameter = () => {
                     flexDirection: 'column',
                     marginBottom: '20px'
                 }}>
-                <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Enter Third Parameters</h1>
+                <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Enter values </h1>
 
-                <label htmlFor="usr_p" style={{ marginBottom: '10px', fontWeight: 'bold' }}>Enter penetration range (3.98 mm - 5.82 mm):</label>
+                <label htmlFor="usr_p" style={{ marginBottom: '10px', fontWeight: 'bold' }}>Enter weld bead depth(3.98 mm - 5.82 mm):</label>
                 <input
                     type="number"
                     id="usr_p"
