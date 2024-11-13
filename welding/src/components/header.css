@@ -1,0 +1,20 @@
+.Header {
+  background-color: #282c34; /* Dark background color */
+  color: #ffffff; /* White text color */
+  padding: 15px 0; /* Reduced padding for a more compact height */
+  text-align: center;
+  font-size: calc(12px + 2vmin);
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow for depth */
+}
+
+.Header-link {
+  color: #ffffff; /* Ensures link text is white */
+  text-decoration: none; /* Removes underline */
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.Header-link:hover {
+  color: #61dafb; /* Light blue color on hover for interactivity */
+  text-decoration: underline; /* Adds underline on hover */
+}

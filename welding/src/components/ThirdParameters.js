@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Header from './Header';
 const ThirdParameter = () => {
     const [usrP, setUsrP] = useState('');
     const [varInt, setVarInt] = useState('');
@@ -33,6 +33,8 @@ const ThirdParameter = () => {
     };
 
     return (
+        <div>
+            <Header/>
         <div style={{
             display: 'flex', 
             justifyContent: 'center', 
@@ -165,6 +167,7 @@ const ThirdParameter = () => {
                     </table>
                 </div>
             )}
+        </div>
         </div>
     );
 };

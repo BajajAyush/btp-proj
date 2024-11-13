@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Calculate.css'; // Import CSS for styling
+import Header from "./Header";
 
 function Calculate() {
     const [results, setResults] = useState([]);
@@ -14,7 +15,10 @@ function Calculate() {
     }, []);
 
     return (
+        <div>
+         <Header/>
         <div className="container">
+            
             <h1 className="heading">Optimization Results</h1>
             <div className="table-wrapper">
                 <table className="results-table">
@@ -50,6 +54,7 @@ function Calculate() {
                     </tbody>
                 </table>
             </div>
+        </div>
         </div>
     );
 }

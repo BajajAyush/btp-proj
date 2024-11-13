@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Parameters.css'; // CSS for improved styling
-
+import Header from "./Header";
 function Parameters() {
     const [formData, setFormData] = useState({
         wire_feed_rate: '',
@@ -41,6 +41,8 @@ function Parameters() {
     };
 
     return (
+        <div>
+            <Header/>
         <div className="parameters-container">
             <h2>Enter Welding Parameters</h2>
             <form onSubmit={handleSubmit} className="form-grid">
@@ -158,6 +160,7 @@ function Parameters() {
                     </div>
                 </div>
             )}
+        </div>
         </div>
     );
 }
