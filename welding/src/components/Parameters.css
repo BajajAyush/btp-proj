@@ -1,23 +1,43 @@
-.parameters-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+/* Parameters.css */
+
+body {
+    background-color: #282c34;
+    color: #ffffff;
     font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.Header, .parameters-container, .result-container {
+    background-color: #282c34;
+    color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
 h2 {
     text-align: center;
-    color: #333;
+    color: #ffffff;
     margin-bottom: 20px;
 }
 
-.form-grid {
+.result-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 15px;
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px; /* Increase gap between columns and rows */
+    padding: 10px; /* Add padding around the grid */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Adds space between label and input */
 }
 
 .form-group {
@@ -28,56 +48,66 @@ h2 {
 .form-group label {
     margin-bottom: 5px;
     font-weight: bold;
-    color: #555;
+    color: #ffffff;
 }
 
 .form-group input {
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #444;
     border-radius: 4px;
     font-size: 1em;
     width: 100%;
+    background-color: #333;
+    color: #ffffff;
 }
 
 .submit-btn {
     grid-column: 1 / -1;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #61dafb;
+    color: #282c34;
     border: none;
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
     text-align: center;
     margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 
 .submit-btn:hover {
-    background-color: #0056b3;
-}
-
-.result-container {
-    margin-top: 30px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.result-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 15px;
+    background-color: #61dafb;
+    color: #ffffff;
 }
 
 .result-item {
     padding: 10px;
-    background-color: #f4f4f4;
+    background-color: #333;
     border-radius: 4px;
     text-align: center;
+    color: #ffffff;
 }
 
 .result-item strong {
     display: block;
     margin-bottom: 5px;
-    color: #333;
+    color: #ffffff;
+}
+
+/* Center the 'Enter New Values' button */
+.new-values-btn {
+    display: block;
+    margin: 20px auto; /* Center-align the button */
+    background-color: #61dafb;
+    color: #282c34;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.new-values-btn:hover {
+    background-color: #61dafb;
+    color: #ffffff;
 }
