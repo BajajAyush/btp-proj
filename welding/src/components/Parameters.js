@@ -50,7 +50,7 @@ function Parameters() {
 
     // Function to format numbers to 3 decimal places
     const formatNumber = (number) => {
-        return parseFloat(number).toFixed(3);
+        return parseFloat(number).toFixed(2);
     };
 
     return (
