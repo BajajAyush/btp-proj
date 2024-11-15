@@ -1,0 +1,33 @@
+.Card {
+    background-color: #3a3f47; /* Dark gray background for the card */
+    color: white;
+    padding: 30px; /* Increased padding for more space within the card */
+    width: 250px; /* Increased width for a larger card */
+    height: 200px; /* Increased height to match width */
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center content horizontally */
+  }
+  
+  .Card:hover {
+    transform: translateY(-5px); /* Lifts card on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .Card h3 {
+    margin: 0;
+    font-size: 1.4em; /* Slightly larger title */
+    color: #61dafb; /* Light blue for the title */
+  }
+  
+  .Card p {
+    font-size: 1em;
+    color: #c0c0c0; /* Slightly lighter color for the description */
+  }
+  
