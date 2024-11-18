@@ -94,7 +94,7 @@ const ThirdParameter = () => {
                                         <th>Width/Penetration Ratio</th>
                                         <th>Area of Penetration (mm²)</th>
                                         <th>Dilution (%)</th>
-                                        <th>RHI</th>
+                                        <th>HPL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
