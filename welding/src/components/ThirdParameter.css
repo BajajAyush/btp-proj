@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    margin: 0 auto;
+    margin: 20px auto; /* Added margin to avoid sticking to the top */
     padding: 20px;
     max-width: 1200px;
     background-color: #3a3f47; /* Darker shade of the theme */
@@ -22,7 +22,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 20px; /* Spacing between child elements */
 }
 
 .heading {
@@ -35,13 +35,13 @@ body {
 }
 
 .parameters-container {
-    width: 100%;
+    width: 95%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #3a3f47; /* Match container */
     padding: 20px;
-    border-radius: 8px;
+    background-color: #3a3f47; /* Matches parent container */
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -58,7 +58,9 @@ body {
     border: 1px solid #444;
     background-color: #4a4f57;
     color: #ffffff;
+    font-size: 18px; /* Increased font size */
 }
+
 
 .parameters-container button {
     padding: 10px 20px;
@@ -69,6 +71,8 @@ body {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto; /* Centers the button within its parent container */
 }
 
 .parameters-container button:hover {
@@ -78,46 +82,30 @@ body {
 
 .result-container {
     width: 100%;
-    background-color: #3a3f47;
+    max-width: 100%;
     padding: 20px;
+    border: 3px solid #61dafb; /* Bold border with accent color */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     color: #ffffff;
-}
-
-.result-container div {
-    margin-bottom: 15px;
-    font-size: 1.2em;
-}
-
-.pagination {
-    display: flex;
-    justify-content: center; /* Center-aligns the buttons horizontally */
-    gap: 10px; /* Adds space between buttons */
-    margin-top: 20px;
-    width: 100%;
-    max-width: 600px;
-}
-
-.parameters-container button {
-    display: block;
-    margin: 0 auto; /* Centers the button within its parent container */
-}
-
-.result-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Align content to center */
+    align-items: center; /* Center content */
+    overflow: hidden; /* Prevent overflow outside the box */
+    background-color: #3a3f47; /* Match theme */
 }
 
 .table-container {
     margin: 20px 0;
-    overflow-x: auto;
+    overflow-x: auto; /* Handle horizontal overflow */
+    width: 100%;
+    max-width: 100%; /* Ensure table stays within the container */
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    margin: 0 auto; /* Center the table */
 }
 
 th, td {
@@ -138,4 +126,11 @@ tr:nth-child(even) {
 
 tr:hover {
     background-color: #555;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center; /* Center-align buttons */
+    gap: 10px; /* Space between buttons */
+    margin-top: 20px;
 }
