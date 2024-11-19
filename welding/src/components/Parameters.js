@@ -170,7 +170,7 @@ function Parameters() {
                             <div className="result-item"><strong>Width/Height Ratio:</strong> {formatNumber(result.wh)}</div>
                             <div className="result-item"><strong>Width/P Ratio:</strong> {formatNumber(result.wp)}</div>
                             <div className="result-item"><strong>Mind:</strong> {formatNumber(result.mind)}</div>
-                            <div className="result-item"><strong>RHI2:</strong> {formatNumber(result.rhi2)}</div>
+                            <div className="result-item"><strong>HPL:</strong> {formatNumber(result.rhi2)}</div>
                             <div className="result-item"><strong>AP (mm²):</strong> {formatNumber(result.ap)}</div>
                         </div>
                         <button onClick={resetForm} className="new-values-btn">Enter New Values</button>

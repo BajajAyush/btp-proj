@@ -1,57 +1,113 @@
-.container {
-    margin: 0 auto;
-    padding: 20px;
-    max-width: 1000px;
-    background-color: #e3f2fd; /* Light blue for container background */
+body {
+    background-color: #282c34; /* Dark blue-gray theme */
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: flex-start;
 }
 
+.container {
+    margin: 20px auto; /* Added margin-top for spacing */
+    padding: 20px;
+    max-width: 1200px;
+    background-color: #3a3f47; /* Darker shade of the theme */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
 .heading {
+    width: 100%;
     text-align: center;
     font-family: 'Arial', sans-serif;
     font-size: 2em;
     margin-bottom: 20px;
-    color: #333;
+    color: #61dafb; /* Bright accent for contrast */
 }
 
 .table-wrapper {
+    width: 100%;
     overflow-x: auto;
-    background-color: #e3f2fd; /* Ensuring table wrapper has a light blue background */
+    background-color: #3a3f47; /* Consistent with container */
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .results-table {
     width: 100%;
     border-collapse: collapse;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #e3f2fd !important; /* Light blue background with !important */
-    color: #333;
+    background-color: #3a3f47; /* Match the container */
+    color: #ffffff;
+   
 }
 
 .results-table th,
 .results-table td {
     padding: 12px 20px;
     text-align: center;
-    border: 1px solid #bbdefb;
-    background-color: #e3f2fd !important; /* Ensuring each cell has light blue background */
+    border: 1px solid #444;
+    background-color: #4a4f57; /* Subtle contrast for cells */
+    color: #ffffff;
 }
 
 .results-table th {
-    background-color: #90caf9 !important; /* Slightly darker blue for headers */
+    background-color: #555a63; /* Slightly brighter than cell background */
     font-weight: bold;
-    color: #0d47a1;
+    color: #61dafb; /* Accent color for headers */
 }
 
 .results-table tr:nth-child(even) {
-    background-color: #e1f5fe !important; /* Very light blue for alternate rows */
+    background-color: #4a4f57; /* Alternate row color matching the theme */
 }
 
 .results-table tr:hover {
-    background-color: #bbdefb !important; /* Slightly darker blue on hover */
+    background-color: #555a63; /* Highlighted row with soft contrast */
+}
+
+.parameters-container,
+.result-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3a3f47; /* Match container */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.parameters-container h2,
+.result-container h2 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #61dafb;
 }
 
 @media (max-width: 768px) {
-    .results-table th, 
+    .container {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .results-table th,
     .results-table td {
         padding: 10px;
         font-size: 0.9em;
+    }
+
+    .heading {
+        font-size: 1.5em;
     }
 }

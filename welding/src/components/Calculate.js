@@ -36,7 +36,7 @@ function Calculate() {
                                 <th>Angle</th>
                                 <th>Welding Speed</th>
                                 <th>Gas Flow Rate</th>
-                                <th>RHI</th>
+                                <th>HPL</th>
                                 <th>Area of Penetration</th>
                             </tr>
                         </thead>
