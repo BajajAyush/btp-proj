@@ -138,7 +138,7 @@ function Parameters() {
                         selectionMode={1}
                         roundCorner={true}
                         option1={'Factorial Method'}
-                        option2={'Universal Method'}
+                        option2={'Dimensional Method'}
                         onSelectSwitch={onSelectSwitch}
                         selectionColor={'#61dafb'}
                         />
