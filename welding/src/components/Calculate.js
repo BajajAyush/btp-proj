@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Calculate.css'; // Import CSS for styling
 import Header from "./Header";
+import CustomSwitch from './CustomSwitch';
 
 function Calculate() {
     const [results, setResults] = useState([]);
+    const [results_univ, setResults_univ] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:5000/calculate', {
@@ -14,10 +16,22 @@ function Calculate() {
         .catch(error => console.error('Error:', error));
     }, []);
 
+    useEffect(() => {
+        fetch('http://localhost:5000/calculate/univ', {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data => setResults_univ(data))
+        .catch(error => console.error('Error:', error));
+    }, []);
+
     // Helper function to format numbers to 2 decimal places
     const formatNumber = (number) => {
         return parseFloat(number).toFixed(2);
     };
+
+    const onSelectSwitch = index => {
+      };
 
     return (
         <div>
