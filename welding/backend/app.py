@@ -322,7 +322,38 @@ def calculate():
     # If the request method is not GET, return a 405 error (method not allowed)
     return jsonify({"error": "Method not allowed"}), 405
 
+@app.route('/calculate/univ', methods=['GET', 'POST'])
+def calculate_univ():
+    if request.method == 'GET':
+        optimized()  # Assuming you have the optimized function
+        results = []  # Store optimization results
+        for j in range(1, scpen + 1):
+            vnat = pval[j].v1 * 2.5 + 26.5
+            wnat = pval[j].w1 * 0.75 + 6.85
+            snat = pval[j].s1 * 7.5 + 32.5
+            nnat = pval[j].n1 * 2.5 + 17.5
+            anat = pval[j].a1 * 10 + 90
+            gnat = pval[j].g1 * 7.5 + 25.5
 
+            result = {
+                'penetration': pval[j].pen,
+                'wire_feed_rate': wnat,
+                'arc_voltage': vnat,
+                'contact_tube_to': nnat,
+                'plate_distance': pval[j].wh1,
+                'angle': anat,
+                'welding_speed': snat,
+                'gas_flow_rate': gnat,
+                'rhi': pval[j].rhi,
+                'area_of_penetration': pval[j].apen
+            }
+            results.append(result)
+
+        # Return the results as JSON to be used by React
+        return jsonify(results)
+    
+    # If the request method is not GET, return a 405 error (method not allowed)
+    return jsonify({"error": "Method not allowed"}), 405
 
 
 
@@ -356,6 +387,22 @@ def usr_opt(usr_w, usr_v, usr_n, usr_th, usr_s, usr_g):
         'ap': ap
     }
 
+def pi8(w,v,n,s,g):
+    p = 0.44 * w**(2.204) * v**(-0.161) * n**(0.257) * s**(-0.524) * g**(-0.156)
+    height = 368.977 * w**(0.535) * v**(-1.19) * n**(0.0902) * s**(-0.438) * g**(-0.101)
+    width = 1.462 * w**(0.68) * v**(1.01) * n**(-0.157) * s**(-0.609) * g**(0.058)
+    wh = width / height
+    wp = width / p
+    dil = 0.166 * w**(1.528) * v**(1.03) * n**(0.151) * s**(-0.289) * g**(-0.137)
+    return {'p':p,
+            'height' : height, 
+            'width' : width, 
+            'wh' : wh, 
+            'wp' : wp,
+            'dil': dil}
+
+
+
 # @app.route('/secondf', methods=['POST'])
 # def secondf():
 #     if request.method == 'POST':
@@ -384,13 +431,21 @@ def parameters():
         usr_g = float(request.form['gas_flow_rate'])
 
         # Call usr_opt() to process the form data
-        result = usr_opt(usr_w, usr_v, usr_n, usr_th, usr_s, usr_g)
-        
-        
+        result = usr_opt(usr_w, usr_v, usr_n, usr_th, usr_s, usr_g)        
         # Return JSON response
         return jsonify(result)   
 
-
+@app.route('/parameters/univ', methods=['GET','POST'])
+def parameters_univ():
+    if request.method == 'POST':
+        usr_w = float(request.form['wire_feed_rate'])
+        usr_v = float(request.form['arc_voltage'])
+        usr_n = float(request.form['nozzle_distance'])
+        usr_s = float(request.form['welding_speed'])
+        usr_g = float(request.form['gas_flow_rate'])
+        result = pi8(usr_w,usr_v,usr_n,usr_s,usr_g)
+        return jsonify(result) 
+    
 def resp_opt(user_p, vaer_int):
     global THICKNESS
     global pval,ap,ap1,maxap,minap,size,j,rnum,scpen,user_ch,ctr,counter,hcount,wcount,totalvals,phcount,lkey, size, totalvals, counter, hcount, wcount, phcount, maxh, minh, maxpen, minpen, maxdil, mindil, maxrhi, minrhi, maxap, minap, scpen, mind, rhi2
@@ -631,10 +686,84 @@ def third_parameters():
 
         # Return JSON response
         return jsonify(results)
+    
+def check_range(value, min_val, max_val):
+    return min_val <= value <= max_val
 
+def sort_pvals(uvals):
+    return sorted(uvals, key=lambda x: (x['pen'], -x['wp1'], x['wh1'], -x['pen']/x['ht1'], x['dil']))
 
+def normalise_values(w, v, n, s, g):
+        n_w = w * (7.6 - (6.1 + 7.6) / 2) + ((6.1 + 7.6) / 2)
+        n_v = v * (29.0 - (24.0 + 29.0) / 2) + ((24.0 + 29.0) / 2)
+        n_n = n * (20.0 - (15.0 + 20.0) / 2) + ((15.0 + 20.0) / 2)
+        n_s = s * (40.0 - (25.0 + 40.0) / 2) + ((25.0 + 40.0) / 2)
+        n_g = g * (33.0 - (18.0 + 33.0) / 2) + ((18.0 + 33.0) / 2)
+        return n_w, n_v, n_n, n_s, n_g
+def get_height(w,v,n,s,g):
+    n_w, n_v, n_n, n_s, n_g = normalise_values(w, v, n, s, g)
+    h = 368.977 * n_w**(0.535) * n_v**(-1.19) * n_n**(0.0902) * n_s**(-0.438) * n_g**(-0.101)
+    return h
+def get_penetration(w,v,n,s,g):
+    n_w, n_v, n_n, n_s, n_g = normalise_values(w, v, n, s, g)
+    p = 0.44 * n_w**(2.204) * n_v**(-0.161) * n_n**(0.257) * n_s**(-0.524) * n_g**(-0.156)
+    return p
+def get_width(w,v,n,s,g):
+    n_w, n_v, n_n, n_s, n_g = normalise_values(w, v, n, s, g)
+    w = 1.462 * n_w**(0.68) * n_v**(1.01) * n_n**(-0.157) * n_s**(-0.609) * n_g**(0.058)
+    return w
+def get_dilution(w,v,n,s,g):
+    n_w, n_v, n_n, n_s, n_g = normalise_values(w, v, n, s, g)
+    d = 0.166 * n_w**(1.528) * n_v**(1.03) * n_n**(0.151) * n_s**(-0.289) * n_g**(-0.137)
+    return d
+def parameter_predictor(p,intv):
+    uvals = []
+    thn = (33 / 100) * 13
+    usr_p = p
+    var_int = intv
+    p_lo = max(2.5, usr_p - (var_int / 100) * usr_p)
+    p_hi = min(5.2, usr_p + (var_int / 100) * usr_p)
 
-
+    total_val = 0
+    h_count = 0
+    ph_count = 0
+    wh_count = 0
+    wp_count = 0
+    fin_count = 0
+    for w in [-1.5 + 0.5 * i for i in range(1,6)]:
+        for v in [-1.5 + 0.5 * i for i in range(1,6)]:
+            for n in [-1.5 + 0.5 * i for i in range(1,6)]:
+                for s in [-1.5 + 0.5 * i for i in range(1,6)]:
+                    for g in [-1.5 + 0.5 * i for i in range(1,6)]:
+                        total_val += 1
+                        height = get_height(w, v, n, s, g)
+                        if height <= thn:
+                            h_count += 1
+                            p = get_penetration(w, v, n, s, g)
+                            ph = p / height
+                            if ph >= 0.64:
+                                ph_count += 1
+                                width = get_width(w, v, n, s, g)
+                                wh = width / height
+                                if 5.2 >= wh >= 3:
+                                    wh_count += 1
+                                    wp = width / p
+                                    if 5.5 >= wp >= 2.9:
+                                        wp_count += 1
+                                        if p_lo <= p <= p_hi:
+                                            dilution = get_dilution(w, v, n, s, g)
+                                            fin_count += 1
+                                            uvals.append({'penetration': round(p,3), 'wire_feed_rate': w* 0.75 + 6.85, 'arc_voltage': v* 2.5 + 26.5, 'contact_tube_distance': n* 2.5 + 17.5, 'welding_speed': s* 7.5 + 32.5, 'shield_gas': g* 7.5 + 25.5,
+                                                          'width_penetration_ratio': round(wp,3), 'width_height_ratio': round(wh,3), 'height': round(height,3), 'width': round(width,3), 'dilution': round(dilution,3)})
+    return uvals[::int(len(uvals)//10)]
+                                            
+@app.route('/thirdparametersuniv', methods=['POST'])
+def third_parameters_univ():
+    if request.method == 'POST':
+        usr_p = float(request.form['usr_p'])
+        var_int = float(request.form['var_int'])
+        results = parameter_predictor(usr_p,var_int) 
+    return jsonify(results)
 
 
 if __name__ == "__main__":
