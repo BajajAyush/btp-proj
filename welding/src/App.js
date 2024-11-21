@@ -14,12 +14,12 @@ function App() {
           to="/parameters" 
         />
         <Card 
-          title="Calculate Results" 
+          title="Optimal Procedures" 
           description="Optimum Procedure for Default Parameter Ranges" 
           to="/calculate" 
         />
         <Card 
-          title="Penetration Calculation" 
+          title="Predefined Penetration" 
           description="Optimum Procedure for specified Response, Penetration" 
           to="/thirdparameters" 
         />
